@@ -7,6 +7,8 @@
 
 跑完一次后，会生成对应的文件夹。之后你可以停止docker stop dnf 然后替换掉里面的 秘钥和pvf文件之类的。再启动
 
+运行docker前，请确保你的swap分区容量足够。推荐直接上8G swap
+
 ```bash
 docker run -it --name dnf   -v /root/docker-dnf/data/home:/home \
     -v /root/docker-dnf/data/mysql:/opt/lampp/var/mysq \
