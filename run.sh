@@ -34,7 +34,9 @@ else
     chmod -R 777 /root
     touch /opt/lampp/var/mysql/install.lock
 fi
+/bin/cp -rf /my.cnf /opt/lampp/etc/
 /opt/lampp/lampp start
 sleep 5
+/opt/lampp/lampp/bin/mysqladmin -ugame -p'uu5!^%jg' flush-hosts
 /root/run
 /bin/bash
