@@ -6,7 +6,7 @@ if [ -f /home/neople/install.lock ];then
     find /home/ -name '*.log' -type f -print -exec rm -f {} \;
     find /home/ -name '*.pid' -type f -print -exec rm -f {} \;
     find /home/ -name '*.MMAP' -type f -print -exec rm -f {} \;
-    find /home/ -name 'core.*' -type f -print -exec rm -f {} \;
+    find /home/ -name 'core*' -type f -print -exec rm -f {} \;
     chmod -R 777 /home
     chmod -R 777 /root
     touch /home/neople/install.lock
