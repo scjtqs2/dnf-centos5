@@ -3,10 +3,6 @@
 setenforce 0
 if [ -f /home/neople/install.lock ];then
     echo "neople is installed"
-    find /home/ -name '*.log' -type f -print -exec rm -f {} \;
-    find /home/ -name '*.pid' -type f -print -exec rm -f {} \;
-    find /home/ -name '*.MMAP' -type f -print -exec rm -f {} \;
-    find /home/ -name 'core*' -type f -print -exec rm -f {} \;
     chmod -R 777 /home
     chmod -R 777 /root
     touch /home/neople/install.lock
@@ -20,6 +16,11 @@ else
     touch /home/neople/install.lock
     /usr/bin/php /sed.php
 fi
+#清理缓存
+find /home/ -name '*.log' -type f -print -exec rm -f {} \;
+find /home/ -name '*.pid' -type f -print -exec rm -f {} \;
+find /home/ -name '*.MMAP' -type f -print -exec rm -f {} \;
+find /home/ -name 'core*' -type f -print -exec rm -f {} \;
 #判断mysql是否安装
 if [ -f /opt/lampp/var/mysql/install.lock ];then
     echo "mysqld is installed"
