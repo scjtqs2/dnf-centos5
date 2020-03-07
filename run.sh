@@ -32,8 +32,6 @@ else
     tar -zxvf /XAMPP.tar.gz -C /
     chmod -R 777 /home
     chmod -R 777 /root
-    chmod -R 755 /opt/lampp/var/mysql/
-    chown -R mysql:mysql /opt/lampp/var/mysql/
     touch /opt/lampp/var/mysql/install.lock
 fi
 /opt/lampp/lampp start
