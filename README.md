@@ -5,6 +5,8 @@
 
 为了避免冲突，我将mysql映射为了3310端口，有其他需要的自行修改。 mysql 用户名：game 密码：uu5!^%jg
 
+跑完一次后，会生成对应的文件夹。之后你可以停止docker stop dnf 然后替换掉里面的 秘钥和pvf文件之类的。再启动
+
 ```bash
 docker run -it --name dnf   -v /root/docker-dnf/data/home:/home \
     -v /root/docker-dnf/data/mysql:/var/lib/mysql \
