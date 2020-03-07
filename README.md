@@ -9,7 +9,7 @@
 
 ```bash
 docker run -it --name dnf   -v /root/docker-dnf/data/home:/home \
-    -v /root/docker-dnf/data/mysql:/var/lib/mysql \
+    -v /root/docker-dnf/data/mysql:/opt/lampp/var/mysq \
         -p 3310:3306/tcp \
         -p 7001:7001/tcp \
         -p 7000:7000/udp \
