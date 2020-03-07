@@ -25,7 +25,7 @@ if [ -f /opt/lampp/var/mysql/install.lock ];then
     echo "mysqld is installed"
     chmod -R 777 /home
     chmod -R 777 /root
-#    chmod -R 755 /opt/lampp/var/mysql/
+    chmod -R 777 /opt/lampp/var/mysql/
 #    chown -R mysql:mysql /opt/lampp/var/mysql/
     touch /opt/lampp/var/mysql/install.lock
 else
