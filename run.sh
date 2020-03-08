@@ -35,6 +35,7 @@ else
     chmod -R 777 /root
     chmod -R 777 /opt/lampp/var/mysql/
     touch /opt/lampp/var/mysql/install.lock
+    /opt/lampp/lampp start
     /opt/lampp/bin/mysql_upgrade -ugame -p'uu5!^%jg'
 fi
 /bin/cp -rf /my.cnf /opt/lampp/etc/
