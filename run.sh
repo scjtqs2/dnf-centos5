@@ -34,9 +34,10 @@ else
     chmod -R 777 /home
     chmod -R 777 /root
     touch /opt/lampp/var/mysql/install.lock
+    /opt/lampp/lampp/bin/mysql_upgrade -ugame -p'uu5!^%jg'
 fi
 /bin/cp -rf /my.cnf /opt/lampp/etc/
-/opt/lampp/lampp start
+/opt/lampp/lampp restart
 sleep 5
 /opt/lampp/lampp/bin/mysqladmin -ugame -p'uu5!^%jg' flush-hosts
 /root/run
