@@ -37,6 +37,7 @@ else
     touch /opt/lampp/var/mysql/install.lock
     /opt/lampp/lampp start
     /opt/lampp/bin/mysql_upgrade -ugame -p'uu5!^%jg'
+    sleep 20s
 fi
 /bin/cp -rf /my.cnf /opt/lampp/etc/
 /opt/lampp/lampp restart
