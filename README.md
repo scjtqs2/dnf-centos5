@@ -19,8 +19,8 @@ docker run -it --name dnf   -v /root/docker-dnf/data/home:/home \
         -p 7200:7200/udp \
         -p 10001:10001/tcp \
         -p 10031:10031/tcp \
-        -p 11011:10011/udp \
-        -p 11031:10031/udp \
+        -p 11011:11011/udp \
+        -p 11031:11031/udp \
         -p 31003:31003/tcp \
         -p 31003:31003/udp \
         -p 9006:9006/tcp \
