@@ -10,7 +10,9 @@
 运行docker前，请确保你的swap分区容量足够。推荐直接上8G swap
 
 ```bash
-docker run -it --name dnf   -v /root/docker-dnf/data/home:/home \
+docker run -it --name dnf \
+    -v /root/docker-dnf/data/home:/home \
+    -v /root/docker-dnf/data/root:/root \
     -v /root/docker-dnf/data/mysql:/opt/lampp/var/mysq \
         -p 3310:3306/tcp \
         -p 7001:7001/tcp \
