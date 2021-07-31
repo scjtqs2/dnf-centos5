@@ -1,6 +1,7 @@
 FROM scjtqs/centos5:latest
 
 ENV PublicIp=127.0.0.1
+ENV UDP_IP=127.0.0.1
 ENV DB_HOST=127.0.0.1
 ENV DB_USER=game
 ENV DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b

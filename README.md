@@ -17,6 +17,7 @@ mysql 用户名：game 密码：uu5!^%jg
 ```bash
 dcker run -it --rm --name dnf --net=host \
 -e PublicIp=你的公网ip 或者机器局域网Ip \
+-e UDP_IP=你的UDP转发IP \
 -e DB_HOST=127.0.0.1 \
 -e DB_USER=game \
 -e DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b \
@@ -29,6 +30,7 @@ scjtqs/dnf-centos5
 ```bash
 dcker run -itd --rm --name dnf --net=host \
 -e PublicIp=你的公网ip 或者机器局域网Ip \
+-e UDP_IP=你的UDP转发IP \
 -e DB_HOST=127.0.0.1 \
 -e DB_USER=game \
 -e DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b \
@@ -41,6 +43,7 @@ scjtqs/dnf-centos5
 ```bash
 docker run -it --name dnf \
 -e PublicIp=你的公网ip 或者机器局域网Ip \
+-e UDP_IP=你的UDP转发IP \
 -e DB_HOST=127.0.0.1 \
 -e DB_USER=game \
 -e DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b \
@@ -60,8 +63,10 @@ docker run -it --name dnf \
         -p 8100:8100/udp \
         -p 9006:9006/tcp \
         -p 9006:9006/udp \
-        -p 10015:10015/tcp \
-        -p 11015:11015/udp \
+        -p 10011:10011/tcp \
+        -p 11011:11011/udp \
+        -p 10052:10052/tcp \
+        -p 11052:11052/udp \
         -p 10056:10056/tcp \
         -p 11056:11056/udp \
         -p 20203:20203/tcp \

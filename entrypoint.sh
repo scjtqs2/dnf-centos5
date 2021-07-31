@@ -7,7 +7,7 @@
 #Public IP   public ip
 #MySQL PWD   明文密码
 sed -i "s/Public IP/$PublicIp/g" `find /home/neople/ -type f -name "*.cfg"`
-sed -i "s/UDP IP/$PublicIp/g" `find /home/neople/ -type f -name "*.cfg"`
+sed -i "s/UDP IP/$UDP_IP/g" `find /home/neople/ -type f -name "*.cfg"`
 sed -i "s/MySQL IP/$DB_HOST/g" `find /home/neople/ -type f -name "*.cfg"`
 sed -i "s/MySQL Name/$DB_USER/g" `find /home/neople/ -type f -name "*.cfg"`
 sed -i "s/MySQL Key/$DB_KEY/g" `find /home/neople/ -type f -name "*.cfg"`
