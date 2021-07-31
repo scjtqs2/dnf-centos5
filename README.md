@@ -15,7 +15,7 @@ mysql 用户名：game 密码：uu5!^%jg
 
 使用 host模式跑
 ```bash
-dcker run -it --rm --name dnf --net=host \
+dcker run -it --rm --name dnf --net=host --privileged=true --memory=8g --oom-kill-disable --shm-size=8g \
 -e PublicIp=你的公网ip 或者机器局域网Ip \
 -e UDP_IP=你的UDP转发IP \
 -e DB_HOST=127.0.0.1 \
@@ -29,7 +29,7 @@ scjtqs/dnf-centos5
 ```
 使后台跑
 ```bash
-dcker run -itd --rm --name dnf --net=host \
+dcker run -itd --rm --name dnf --net=host --privileged=true --memory=8g --oom-kill-disable --shm-size=8g \
 -e PublicIp=你的公网ip 或者机器局域网Ip \
 -e UDP_IP=你的UDP转发IP \
 -e DB_HOST=127.0.0.1 \
@@ -43,7 +43,7 @@ scjtqs/dnf-centos5
 ```
 
 ```bash
-docker run -it --name dnf \
+docker run -it --name dnf --privileged=true --memory=8g --oom-kill-disable --shm-size=8g \
 -e PublicIp=你的公网ip 或者机器局域网Ip \
 -e UDP_IP=你的UDP转发IP \
 -e DB_HOST=127.0.0.1 \

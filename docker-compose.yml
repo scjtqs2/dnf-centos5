@@ -1,4 +1,4 @@
-version: '3.7'
+version: '2.2'
 services:
   dnf:
     image: scjtqs/dnf-centos5
@@ -6,13 +6,17 @@ services:
     hostname: dnf
     privileged: true
     tty: true
+    stdin_open: true
+    shm_size: 8g
+    oom_kill_disable: true
+    mem_limit: 8g
     network_mode: host
     environment:
       # DB_HOST 如果你是外部db修改这里的db配置吧
       - DB_HOST=127.0.0.1
       #添加你的公网Ip，如果处于nat网络中，请自行做好穿透
-      - PublicIp=192.168.50.184
-      - UDP_IP=192.168.50.184
+      - PublicIp=192.168.1.106
+      - UDP_IP=192.168.1.106
       - DB_USER=game  #数据库的用户名
       - DB_PASS=uu5!^%jg  #数据库密码
       - DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b  #数据库密码对应的密文. 可以用tea.php 计算。
