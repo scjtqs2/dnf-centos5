@@ -1,13 +1,40 @@
-FROM scjtqs/dnf-centos5-base:latest
+FROM scjtqs/centos5:latest
 
-ARG PublicIp=127.0.0.1
-ENV PublicIp=${PublicIp}
+ENV PublicIp=127.0.0.1
+ENV DB_HOST=127.0.0.1
+ENV DB_USER=game
+ENV DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b
+ENV DB_PASS=uu5!^%jg
 
-COPY init.sh /
-COPY run.sh /
-COPY sed.php /
-RUN /bin/bash /init.sh
+# 数据库的数据存储位置
+ENV DIRECTORY=/home/data/
 
+COPY DnfServer.tar.gz /
+COPY entrypoint.sh /
+COPY Script.pvf /src/
+COPY df_game_r /src/
+#COPY publickey.pem /src/
+COPY run.sh /root/
+#COPY stop.sh /root/
+COPY sed.php /root/
+#ENV TINI_VERSION v0.19.0
+#ADD https://ghproxy.com/https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static /tini
+COPY my.cnf /opt/etc/
+
+#复制统一登录器
+COPY tongyi-5.8/Config.ini /root/
+COPY tongyi-5.8/DnfGateServer /root/
+COPY tongyi-5.8/GateRestart /root/
+COPY tongyi-5.8/GateStop /root/
+COPY tongyi-5.8/privatekey.pem /root/
+
+WORKDIR /root/
+
+RUN tar -zxvf /DnfServer.tar.gz -C / \
+    && rm -rf /DnfServer.tar.gz \
+    && chmod +x /entrypoint.sh \
+    && chmod -R +x /root/
+#    && chmod +x /tini
 
 # PORT
 EXPOSE 2311
@@ -28,4 +55,8 @@ EXPOSE 30403
 EXPOSE 31003
 EXPOSE 31100
 
-ENTRYPOINT ["/run.sh"]
+#ENTRYPOINT ["/tini", "--","/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/tini", "--","bash"]
+
+#CMD []

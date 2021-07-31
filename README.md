@@ -1,19 +1,52 @@
 # dnf-centos5
-这个 dnf私服 的服务端
+这个 dnf私服 的服务端 
 
-如果运行下面代码，服务端文件会存在 /root/docker-dnf/data/home 下，对应的mysql文件存于 /root/docker-dnf/data/mysql
+mysql 用户名：game 密码：uu5!^%jg
 
-为了避免冲突，我将mysql映射为了3310端口，有其他需要的自行修改。 mysql 用户名：game 密码：uu5!^%jg
-
-跑完一次后，会生成对应的文件夹。之后你可以停止docker stop dnf 然后替换掉里面的 秘钥和pvf文件之类的。再启动
+集成了统一登录器 5.8的服务端。默认配置查看 tongyi-5.8/Config.ini
 
 运行docker前，请确保你的swap分区容量足够。推荐直接上8G swap
 
+> 如果使用了独立的数据库，并导入了初始化的库和表，可以自行修改 `DB_HOST`,`DB_USER`，`DB_KEY`，`DB_PASS`
+>
+> 初始化mysql的sql文件是 db.sql。默认创建用户：`game`、密码：`uu5!^%jg`。以及对应的库。 
+> 
+
+
+使用 host模式跑
+```bash
+dcker run -it --rm --name dnf --net=host \
+-e PublicIp=你的公网ip 或者机器局域网Ip \
+-e DB_HOST=127.0.0.1 \
+-e DB_USER=game \
+-e DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b \
+-e DB_PASS=uu5!^%jg \
+-v /你自己的pvf/Script.pvf:/src/Script.pvf \
+-v /root/db/:/home/data/ \
+scjtqs/dnf-centos5
+```
+使后台跑
+```bash
+dcker run -itd --rm --name dnf --net=host \
+-e PublicIp=你的公网ip 或者机器局域网Ip \
+-e DB_HOST=127.0.0.1 \
+-e DB_USER=game \
+-e DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b \
+-e DB_PASS=uu5!^%jg \
+-v /你自己的pvf/Script.pvf:/src/Script.pvf \
+-v /root/db/:/home/data/ \
+scjtqs/dnf-centos5
+```
+
 ```bash
 docker run -it --name dnf \
-    -v /root/docker-dnf/data/home:/home \
-    -v /root/docker-dnf/data/root:/root \
-    -v /root/docker-dnf/data/mysql:/opt/lampp/var/mysq \
+-e PublicIp=你的公网ip 或者机器局域网Ip \
+-e DB_HOST=127.0.0.1 \
+-e DB_USER=game \
+-e DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b \
+-e DB_PASS=uu5!^%jg \
+-v /你自己的pvf/Script.pvf:/src/Script.pvf \
+-v /root/db/:/home/data/ \
         -p 3310:3306/tcp \
         -p 2311-2313:2311-2313/tcp \
         -p 2311-2313:2311-2313/udp \
@@ -43,6 +76,13 @@ docker run -it --name dnf \
         -p 31003:31003/udp \
         -p 31100:31100/tcp \
         -p 31100:31100/udp \
-    -e PublicIp=你的公网ip 或者机器局域网Ip \
     scjtqs/dnf-centos5
+```
+
+# 直接用docker-compose跑
+```bash
+#修改好 docker-compose.yml的配置
+docker-compose up -d
+# 查看日志情况。
+docker logs -f dnf 
 ```

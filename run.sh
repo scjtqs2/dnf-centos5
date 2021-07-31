@@ -1,47 +1,113 @@
 #!/bin/bash
-#判断neople是否安装
-setenforce 0
-if [ -f /home/neople/install.lock ];then
-    echo "neople is installed"
-    chmod -R 777 /home
-    chmod -R 777 /root
-    touch /home/neople/install.lock
-else
-    tar -zxvf /DNFServer.tar.gz -C /
-    mv /pvf/df_game_r /home/neople/game/
-    mv /pvf/publickey.pem /home/neople/game/
-    mv /pvf/Script.pvf /home/neople/game/
-    chmod -R 777 /home
-    chmod -R 777 /root
-    touch /home/neople/install.lock
-    /usr/bin/php /sed.php
-fi
-#清理缓存
-find /home/ -name '*.log' -type f -print -exec rm -f {} \;
-find /home/ -name '*.pid' -type f -print -exec rm -f {} \;
-find /home/ -name '*.MMAP' -type f -print -exec rm -f {} \;
-find /home/ -name 'core*' -type f -print -exec rm -f {} \;
-#判断mysql是否安装
-if [ -f /opt/lampp/var/mysql/install.lock ];then
-    echo "mysqld is installed"
-    chmod -R 777 /home
-    chmod -R 777 /root
-    chmod -R 777 /opt/lampp/var/mysql/
-#    chown -R mysql:mysql /opt/lampp/var/mysql/
-    touch /opt/lampp/var/mysql/install.lock
-else
-    tar -zxvf /XAMPP.tar.gz -C /
-    chmod -R 777 /home
-    chmod -R 777 /root
-    chmod -R 777 /opt/lampp/var/mysql/
-    touch /opt/lampp/var/mysql/install.lock
-    /opt/lampp/lampp start
-    /opt/lampp/bin/mysql_upgrade -ugame -p'uu5!^%jg'
-    sleep 60s
-fi
-/bin/cp -rf /my.cnf /opt/lampp/etc/
-/opt/lampp/lampp restart
-sleep 5
-/opt/lampp/bin/mysqladmin -ugame -p'uu5!^%jg' flush-hosts
-/root/run
-/bin/bash
+## 可以自定义的启动脚本. 位于 /root/run.sh
+cd /home/neople/stun
+chmod 777 *
+rm -f  /home/neople/stun/pid/*.pid
+rm -rf /home/neople/stun/log/*.*
+./df_stun_r start &
+
+cd /home/neople/monitor
+chmod 777 *
+rm -f  /home/neople/monitor/pid/*.pid
+rm -rf  /home/neople/monitor/log/*.*
+./df_monitor_r mnt_siroco start &
+
+cd /home/neople/manager
+chmod 777 *
+rm -f  /home/neople/manager/pid/*.pid
+rm -rf  /home/neople/manager/log/*.*
+./df_manager_r manager start &
+
+cd /home/neople/relay
+chmod 777 *
+rm -f  /home/neople/relay/pid/*.pid
+rm -rf  /home/neople/relay/log/*.*
+./df_relay_r relay_200 start &
+
+cd /home/neople/bridge
+chmod 777 *
+rm -f  /home/neople/bridge/pid/*.pid
+rm -rf  /home/neople/bridge/log/*.*
+./df_bridge_r bridge start &
+
+cd /home/neople/channel
+chmod 777 *
+rm -f  /home/neople/channel/pid/*.pid
+rm -rf  /home/neople/channel/log/*.*
+./df_channel_r channel start &
+
+cd /home/neople/dbmw_guild
+chmod 777 *
+rm -f  /home/neople/dbmw_guild/pid/*.pid
+rm -rf  /home/neople/dbmw_guild/log/*.*
+./df_dbmw_r dbmw_gld_siroco start &
+
+cd /home/neople/dbmw_mnt
+chmod 777 *
+rm -f  /home/neople/dbmw_mnt/pid/*.pid
+rm -rf  /home/neople/dbmw_mnt/log/*.*
+./df_dbmw_r dbmw_mnt_siroco start &
+
+cd /home/neople/dbmw_stat
+chmod 777 *
+rm -f  /home/neople/dbmw_stat/pid/*.pid
+rm -rf  /home/neople/dbmw_stat/log/*.*
+./df_dbmw_r dbmw_stat_siroco start &
+
+cd /home/neople/auction
+chmod 777 *
+rm -f  /home/neople/auction/pid/*.pid
+rm -rf  /home/neople/auction/log/*.*
+./df_auction_r ./cfg/auction_siroco.cfg start ./df_auction_r &
+
+cd /home/neople/point
+chmod 777 *
+rm -f  /home/neople/point/pid/*.pid
+rm -rf  /home/neople/point/log/*.*
+./df_point_r ./cfg/point_siroco.cfg start df_point_r &
+
+cd /home/neople/guild
+chmod 777 *
+rm -f  /home/neople/guild/pid/*.pid
+rm -rf  /home/neople/guild/log/*.*
+./df_guild_r gld_siroco start &
+
+cd /home/neople/statics
+chmod 777 *
+rm -f  /home/neople/statics/pid/*.pid
+rm -rf  /home/neople/statics/log/*.*
+./df_statics_r stat_siroco start &
+
+cd /home/neople/coserver
+chmod 777 *
+rm -f  /home/neople/coserver/pid/*.pid
+rm -rf  /home/neople/coserver/log/*.*
+./df_coserver_r coserver start &
+
+cd /home/neople/community
+chmod 777 *
+rm -f /home/neople/community/pid/*.pid
+rm -rf /home/neople/community/log/*.*
+./df_community_r community start &
+
+cd /home/neople/secsvr/gunnersvr
+chmod 777 *
+rm -f /home/neople/secsvr/gunnersvr/*.pid
+./gunnersvr -t30 -i1  &
+
+cd /home/neople/secsvr/zergsvr
+chmod 777 *
+rm -f /home/neople/secsvr/zergsvr/*.pid
+
+./secagent  &
+./zergsvr -t30 -i1  &
+
+cd /home/neople/game
+chmod 777 *
+rm -rf /home/neople/game/log/*
+sleep 2
+./df_game_r siroco11 start &
+sleep 2
+./df_game_r siroco52 start &
+sleep 2
+./df_game_r siroco56 start &
