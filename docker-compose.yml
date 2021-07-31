@@ -12,6 +12,7 @@ services:
       - DB_HOST=127.0.0.1
       #添加你的公网Ip，如果处于nat网络中，请自行做好穿透
       - PublicIp=192.168.50.184
+      - UDP_IP=192.168.50.184
       - DB_USER=game  #数据库的用户名
       - DB_PASS=uu5!^%jg  #数据库密码
       - DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b  #数据库密码对应的密文. 可以用tea.php 计算。
@@ -32,6 +33,12 @@ services:
 #      - 11001:11001/udp
 #      - 10031:10031/tcp
 #      - 11031:11031/udp
+#      - 10011:10011/tcp
+#      - 11011:11011/udp
+#      - 10052:10052/tcp
+#      - 11052:11052/udp
+#      - 10056:10056/tcp
+#      - 11056:11056/udp
 #      - 20017-20018:20017-20018/tcp
 #      - 20017-20018:20017-20018/udp
 #      - 20201:20201/tcp
@@ -69,6 +76,7 @@ services:
 #      - 31100:31100/tcp
 #      - 31100:31100/udp
     volumes:
-      - ./db:/home/data/
-      - ./Script.pvf:/src/Script.pvf
-      - ./run.sh:/root/run.sh
+      - ./db:/home/data/              #数据库文件
+      - ./Script.pvf:/src/Script.pvf  #你自己的pvf文件
+      - ./df_game_r:/src/df_game_r  #等级补丁
+      - ./run.sh:/root/run.sh      #可以自定义的启动脚本（主要是自己开频道用）

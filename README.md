@@ -24,6 +24,7 @@ dcker run -it --rm --name dnf --net=host \
 -e DB_PASS=uu5!^%jg \
 -v /你自己的pvf/Script.pvf:/src/Script.pvf \
 -v /root/db/:/home/data/ \
+-v /你自己的等级补丁/df_game_r:/src/df_game_r  \
 scjtqs/dnf-centos5
 ```
 使后台跑
@@ -37,6 +38,7 @@ dcker run -itd --rm --name dnf --net=host \
 -e DB_PASS=uu5!^%jg \
 -v /你自己的pvf/Script.pvf:/src/Script.pvf \
 -v /root/db/:/home/data/ \
+-v /你自己的等级补丁/df_game_r:/src/df_game_r  \
 scjtqs/dnf-centos5
 ```
 
@@ -50,6 +52,7 @@ docker run -it --name dnf \
 -e DB_PASS=uu5!^%jg \
 -v /你自己的pvf/Script.pvf:/src/Script.pvf \
 -v /root/db/:/home/data/ \
+-v /你自己的等级补丁/df_game_r:/src/df_game_r  \
         -p 3310:3306/tcp \
         -p 2311-2313:2311-2313/tcp \
         -p 2311-2313:2311-2313/udp \
