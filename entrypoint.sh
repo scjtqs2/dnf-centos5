@@ -41,7 +41,7 @@ sleep 20
 # 替换db中的参数
 php /root/sed.php
 
-/root/run.sh
+chmod +x /root/run.sh && /root/run.sh
 
 
 #启动统一登录器
