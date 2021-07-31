@@ -14,7 +14,7 @@ COPY DnfServer.tar.gz /
 COPY entrypoint.sh /
 COPY Script.pvf /src/
 COPY df_game_r /src/
-#COPY publickey.pem /src/
+COPY publickey.pem /src/
 COPY run.sh /root/
 #COPY stop.sh /root/
 COPY sed.php /root/

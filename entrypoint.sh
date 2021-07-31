@@ -36,7 +36,7 @@ sleep 20
 # 替换 df_game_r
 /bin/cp -rf /src/df_game_r /home/neople/game/
 # 替换 publickey.pem 统一登录器的
-/bin/cp -rf /root/publickey.pem /home/neople/game/
+/bin/cp -rf /src/publickey.pem /home/neople/game/
 
 # 替换db中的参数
 php /root/sed.php

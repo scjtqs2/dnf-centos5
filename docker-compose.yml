@@ -71,3 +71,4 @@ services:
       - ./Script.pvf:/src/Script.pvf  #你自己的pvf文件
       - ./df_game_r:/src/df_game_r  #等级补丁
       - ./run.sh:/root/run.sh      #可以自定义的启动脚本（主要是自己开频道用）
+      - ./tongyi-5.8/Config.ini:/root/Config.ini
