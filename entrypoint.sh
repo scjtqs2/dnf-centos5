@@ -26,10 +26,10 @@ fi
 
 
 #启动mysql
-chmod +x /opt/lampp/lampp
-/opt/lampp/lampp start
+#chmod +x /opt/lampp/lampp
+#/opt/lampp/lampp start
 
-sleep 20
+#sleep 20
 
 # 替换 Script.pvf
 /bin/cp -rf /src/Script.pvf /home/neople/game/

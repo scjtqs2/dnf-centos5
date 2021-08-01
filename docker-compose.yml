@@ -11,6 +11,8 @@ services:
     oom_kill_disable: true
     mem_limit: 8g
     network_mode: host
+    depends_on:
+      - db
     environment:
       # DB_HOST 如果你是外部db修改这里的db配置吧
       - DB_HOST=127.0.0.1
@@ -20,55 +22,23 @@ services:
       - DB_USER=game  #数据库的用户名
       - DB_PASS=uu5!^%jg  #数据库密码
       - DB_KEY=20e35501e56fcedbe8b10c1f8bc3595be8b10c1f8bc3595b  #数据库密码对应的密文. 可以用tea.php 计算。
-#    ports:
-#      - 2311-2313:2311-2313/tcp
-#      - 2311-2313:2311-2313/udp
-#      - 7000-7001:7000-7001/udp
-#      - 7000-7001:7000-7001/tcp
-#      - 7200-7201:7200-7201/tcp
-#      - 7200-7201:7200-7201/udp
-#      - 8000:8000/tcp
-#      - 8000:8000/udp
-#      - 8100:8100/tcp
-#      - 8100:8100/udp
-#      - 9006:9006/tcp
-#      - 9006:9006/udp
-#      - 10001:10001/tcp
-#      - 11001:11001/udp
-#      - 10031:10031/tcp
-#      - 11031:11031/udp
-#      - 10011:10011/tcp
-#      - 11011:11011/udp
-#      - 10052:10052/tcp
-#      - 11052:11052/udp
-#      - 10056:10056/tcp
-#      - 11056:11056/udp
-#      - 20017-20018:20017-20018/tcp
-#      - 20017-20018:20017-20018/udp
-#      - 20203:20203/tcp
-#      - 20203:20203/udp
-#      - 20303:20303/tcp
-#      - 20303:20303/udp
-#      - 20403:20403/tcp
-#      - 20403:20403/udp
-#      - 30303:30303/tcp
-#      - 30303:30303/udp
-#      - 30403:30403/tcp
-#      - 30403:30403/udp
-#      - 30503:30503/udp
-#      - 20603:30603/tcp
-#      - 30603:30603/udp
-#      - 30703:30703/udp
-#      - 30803:30803/tcp
-#      - 30803:30803/udp
-#      - 31003:31003/tcp
-#      - 31003:31003/udp
-#      - 31100:31100/tcp
-#      - 40403:40403/tcp
-#      - 40403:40403/udp
     volumes:
-      - ./db:/home/data/              #数据库文件
+#      - ./db:/home/data/              #数据库文件
       - ./Script.pvf:/src/Script.pvf  #你自己的pvf文件
       - ./df_game_r:/src/df_game_r  #等级补丁
       - ./run.sh:/root/run.sh      #可以自定义的启动脚本（主要是自己开频道用）
       - ./tongyi-5.8/Config.ini:/root/Config.ini
+
+  db:
+    image: mysql:5.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    network_mode: host
+    command:
+      --character-set-server=utf8
+      --collation-server=utf8_general_ci
+      --lower_case_table_names=1
+      --max_allowed_packet=128M
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/init.sql
