@@ -108,6 +108,6 @@ rm -rf /home/neople/game/log/*
 sleep 2
 ./df_game_r siroco11 start &
 sleep 2
-./df_game_r siroco52 start &
+#./df_game_r siroco52 start &
 sleep 2
 ./df_game_r siroco56 start &
