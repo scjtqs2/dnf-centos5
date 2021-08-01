@@ -38,10 +38,16 @@ services:
     oom_kill_disable: true
     mem_limit: 8g
     command:
-      --character-set-server=utf8
-      --collation-server=utf8_general_ci
-      --lower_case_table_names=1
+#      --character-set-server=utf8
+#      --collation-server=utf8_general_ci
+#      --lower_case_table_names=1
       --max_allowed_packet=20M
+      --table_cache=64
+      --sort_buffer_size=512K
+      --net_buffer_length=8K
+      --read_buffer_size=256K
+      --read_rnd_buffer_size=512K
+      --myisam_sort_buffer_size=8M
     volumes:
       - ./mysql:/var/lib/mysql
       - ./db.sql:/docker-entrypoint-initdb.d/init.sql
