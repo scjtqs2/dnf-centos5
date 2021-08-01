@@ -17,7 +17,7 @@ mysql 用户名：game 密码：uu5!^%jg
 ### 1、启动一个db 
 
 ```bash 
-docker run --name some-mysql \
+docker run --name some-mysql --net=host \
 -v /root/dnf-centos5/mysql:/var/lib/mysql \
 -v /root/dnf-centos5/db.sql:/docker-entrypoint-initdb.d/init.sql
 -e MYSQL_ROOT_PASSWORD=my-secret-pw \
