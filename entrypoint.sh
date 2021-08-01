@@ -13,23 +13,23 @@ sed -i "s/MySQL Name/$DB_USER/g" `find /home/neople/ -type f -name "*.cfg"`
 sed -i "s/MySQL Key/$DB_KEY/g" `find /home/neople/ -type f -name "*.cfg"`
 sed -i "s/MySQL PWD/$DB_PASS/g" `find /home/neople/ -type f -name "*.cfg"`
 
-sed -i "s,{DIRECTORY},$DIRECTORY,g" /opt/etc/my.cnf
-
-#DIRECTORY=/home/data/
-mkdir -p $DIRECTORY
-if [ "`ls -A $DIRECTORY`" = "" ]; then
-  echo "$DIRECTORY is indeed empty"
-  /bin/cp -af /opt/lampp/var/mysql $DIRECTORY
-else
-  echo "$DIRECTORY is not empty"
-fi
+#sed -i "s,{DIRECTORY},$DIRECTORY,g" /opt/etc/my.cnf
+#
+##DIRECTORY=/home/data/
+#mkdir -p $DIRECTORY
+#if [ "`ls -A $DIRECTORY`" = "" ]; then
+#  echo "$DIRECTORY is indeed empty"
+#  /bin/cp -af /opt/lampp/var/mysql $DIRECTORY
+#else
+#  echo "$DIRECTORY is not empty"
+#fi
 
 
 #启动mysql
 #chmod +x /opt/lampp/lampp
 #/opt/lampp/lampp start
 
-#sleep 20
+sleep 20
 
 # 替换 Script.pvf
 /bin/cp -rf /src/Script.pvf /home/neople/game/
