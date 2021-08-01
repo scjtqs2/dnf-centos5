@@ -34,11 +34,14 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
     network_mode: host
+    shm_size: 8g
+    oom_kill_disable: true
+    mem_limit: 8g
     command:
       --character-set-server=utf8
       --collation-server=utf8_general_ci
       --lower_case_table_names=1
-      --max_allowed_packet=128M
+      --max_allowed_packet=20M
     volumes:
       - ./mysql:/var/lib/mysql
       - ./db.sql:/docker-entrypoint-initdb.d/init.sql
