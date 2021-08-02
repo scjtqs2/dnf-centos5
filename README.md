@@ -12,6 +12,17 @@ mysql 用户名：game 密码：uu5!^%jg
 > 初始化mysql的sql文件是 db.sql。默认创建用户：`game`、密码：`uu5!^%jg`。以及对应的库。 
 > 
 
+# FAQ
+
+默认的Script.pvf 是黑岩1.6的版本，df_game_r是95级等级补丁。
+
+[其他文档](docs)
+
+# 拉取本仓库
+```bash 
+git clone https://github.com/scjtqs/dnf-centos5 --depth 1 /root/dnf-centos5
+```
+
 ## 一、docker 方式 （建议用dokcer-compose的方式）
 
 ### 1、启动一个db 
@@ -53,11 +64,32 @@ dcker run -itd --rm --name dnf --net=host --privileged=true --memory=8g --oom-ki
 scjtqs/dnf-centos5
 ```
 
-# 直接用docker-compose跑
+## 直接用docker-compose跑 （推荐）
 ```bash
-mkdir -p mysql
+mkdir -p /root/dnf-centos5/mysql
 #修改好 docker-compose.yml的配置
+# 启动服务
 docker-compose up -d
-# 查看日志情况。
+# 查看日志情况。观察它出五国
 docker logs -f dnf 
+#  关闭服务
+docker-compose down
+```
+
+### docker-compose的安装 
+#### centos7
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
+
+#### ubuntu
+```bash
+apt-get install docker-compose
+```
+
+#### 使用pip3安装
+```bash
+pip3 install docker-compose -i https://pypi.douban.com/simple/
 ```
