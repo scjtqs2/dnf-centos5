@@ -10,7 +10,7 @@ SELECT m_id FROM `taiwan_login`.`login_account_3` WHERE login_status=1;
 SELECT * FROM `d_taiwan`.`accounts` WHERE UID IN(1,2,3,4,5)
 ```
 
-## 账号登录（统一登录器）
+## 账号登录
 ```sql
 set names utf8;
 -- 栗子。账号 test 密码 123456 密码的md5 e10adc3949ba59abbe56e057f20f883e
@@ -136,3 +136,93 @@ SELECT * FROM `d_taiwan`.`accounts` WHERE `accountname`="test" and `password`="e
         return $this->table('letter')->insertGetId($data);
     }
 ```
+
+## 充值
+```js
+// 待:查询uid是否存在，存在则update，不存在则insert
+// 充值D币
+function Dcoin(params) {
+  let sql = `update taiwan_billing.cash_cera set cera=(cera+${params.num}) where account='${params.uid}'`;
+  // let sql = `insert into taiwan_billing.cash_cera values ('$uid',$cz_num,0,'$datetime','$datetime')`;
+  
+  return sql;
+}
+
+// 充值D点
+function DSmallcoin(params) {
+  let sql = `update taiwan_billing.cash_cera_point set cera_point=(cera_point+${params.num}) where account='${params.uid}'`;
+  // let sql = `insert into taiwan_billing.cash_cera_point values ('$uid',$cz_num,'$datetime','$datetime')`;
+  return sql;
+}
+
+// 充值游戏币
+function Goldcoin(params) {
+  let sql = `update taiwan_cain_2nd.inventory set money=(money+${params.num}) where charac_no=${params.mid}`
+  return sql;
+}
+
+// 充值时装点
+function fashion(params) {
+  let sql = `update taiwan_cain_2nd.member_avatar_coin  set avatar_coin=(avatar_coin+${params.num}) where m_id=${params.uid}`
+  return sql;
+}
+
+// 充值SP
+function SP(params) {
+  let sql = `update taiwan_cain_2nd.skill set remain_sp=(remain_sp+${params.num}) where charac_no=${params.mid}`;
+  return sql;
+}
+
+// 充值TP
+function TP(params) {
+  let sql = `update taiwan_cain_2nd.skill set remain_sfp_2nd=(remain_sfp_2nd+${params.num}) where charac_no=${params.mid}`
+  return sql;
+}
+
+// 充值QP
+function QP(params) {
+  let sql = `update taiwan_cain.charac_quest_shop set qp=(qp+${params.num}) where charac_no=${params.mid}`
+  return sql;
+}
+```
+
+## 一些常用操作
+```js
+    switch (type) {
+      // 清空邮件
+      case 0:
+        sql.push(db(`delete  from taiwan_cain_2nd.letter where charac_no=${mid} and send_charac_no=0 and send_charac_name like '%GM%'`))
+        sql.push(db(`delete from taiwan_cain_2nd.postal where receive_charac_no=${mid} and send_charac_no=0 and delete_flag=0`))
+        break;
+      // 清空时装
+      case 1:
+        sql.push(db(`delete from taiwan_cain_2nd.user_items where slot>9 and charac_no=${mid}`))
+        break;
+      // 清空宠物
+      case 2:
+        sql.push(db(`delete from taiwan_cain_2nd.creature_items where slot<>238 and charac_no=${mid}`))
+        break;
+      // 解除创建角色限制
+      case 3:
+        sql.push(db(`update d_taiwan.limit_create_character set count=0 where m_id=${uid}`))
+      break;
+    }
+```
+
+## 统一登录器的一些db
+> 库名：`taiwan_siroco`
+>
+```
+MySQL [taiwan_siroco]> show tables;
++-------------------------+
+| Tables_in_taiwan_siroco |
++-------------------------+
+| blacklist               |
+| member_play_info        |
+| new_cdk                 |
+| waigua_feature          |
++-------------------------+
+4 rows in set (0.03 sec)
+```
++ `new_cdk` ckd工具对应的库
++ `member_play_info` 可以用来查询在线用户和在线角色,等信息。
