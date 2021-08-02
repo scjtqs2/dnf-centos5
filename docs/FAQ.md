@@ -56,3 +56,8 @@
 > 我跑在腾讯云的 1c1g 上，做了8GB的 swap (机械硬盘）。出5国跑了30分钟。。窝草。
 > 
 
+3、 关于数据库mysql 5.5
+> 不能设置 `character-set-server=utf8` 以及 `collation-server=utf8_general_ci`。使用默认的字符集 latin1即可，否则会出现 "黑频道"现象。
+> 
+> 其他调优参数，自行修改docker-compose.yml 中的配置就行了。
+> 
