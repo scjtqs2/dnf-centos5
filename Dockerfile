@@ -40,6 +40,10 @@ RUN tar -zxvf /DnfServer.tar.gz -C / \
     && chmod -R +x /root/
 #    && chmod +x /tini
 
+# 调整时区
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo Asia/Shanghai > /etc/timezone
+
 # PORT
 EXPOSE 2311
 EXPOSE 2312
