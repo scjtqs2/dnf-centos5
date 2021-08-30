@@ -20,7 +20,7 @@ mysql 用户名：game 密码：uu5!^%jg
 
 # 拉取本仓库
 ```bash 
-git clone https://github.com/scjtqs/dnf-centos5 --depth 1 /root/dnf-centos5
+git clone https://gitlab.scjtqs.com:8444/scjtqs/dnf-centos5 --depth 1 /root/dnf-centos5
 ```
 
 ## 一、docker 方式 （建议用dokcer-compose的方式）
